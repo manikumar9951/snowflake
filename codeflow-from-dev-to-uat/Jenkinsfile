@@ -1,7 +1,7 @@
 pipeline {
     agent {label 'slave'}
     stages {
-        stage('code flow') {
+        stage('code flow from dev to uat') {
             steps {
                 sh '''
                 cd /home/slave/codeflow/snowflake
