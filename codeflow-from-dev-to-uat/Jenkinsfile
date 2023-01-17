@@ -1,0 +1,18 @@
+pipeline {
+    agent {label 'slave'}
+    stages {
+        stage('code flow') {
+            steps {
+                sh '''
+                cd /home/slave/codeflow-to-uat/snowflake
+                git checkout uat
+                git fetch
+                git pull
+                git status
+                git merge --no-ff -m "codeflow from dev to uat" origin/dev 
+                git push
+                '''
+            }
+        }
+    }
+}  
