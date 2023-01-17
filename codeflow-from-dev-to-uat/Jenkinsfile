@@ -4,7 +4,7 @@ pipeline {
         stage('code flow') {
             steps {
                 sh '''
-                cd /home/slave/codeflow-to-uat/snowflake
+                cd /home/slave/codeflow/snowflake
                 git checkout uat
                 git fetch
                 git pull
