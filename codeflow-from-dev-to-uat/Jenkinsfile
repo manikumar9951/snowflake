@@ -6,10 +6,14 @@ pipeline {
                 sh '''
                 cd /home/slave/codeflow/snowflake
                 git checkout uat
-                git fetch
-                git pull
-                git status
-                git merge --no-ff -m "codeflow from dev to uat" origin/dev 
+                git fetch && git pull
+                git reset --hard origin/uat
+                if ! git merge-base --is-ancestor origin/dev HEAD; then
+                  git merge --no-ff -m "codeflow from dev to uat" origin/dev
+                else
+                  echo "codeflow is not necessary"
+                  exit 0
+                fi
                 git push
                 '''
             }
